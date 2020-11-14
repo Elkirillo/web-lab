@@ -1,0 +1,19 @@
+﻿@model IEnumerable<string>
+
+@Html.ActionLink("Домой", "List", "Books", null, new { @class = "btn btn-block btn-default btn-lg"})
+
+@**осущесвляется переход по именам категорий и создание ссылок для каждой*@
+@foreach (var link in Model)
+{
+    @Html.RouteLink(link, new
+    {
+        controller = "Books",
+        action = "List",
+        genre = link,
+        page = 1
+    }, new
+    {
+        @class = "btn btn-block btn-default btn-lg"
+            + (link == ViewBag.SelectedGenre ? " btn-primary" : "") @*выводится информация о выбранной категории*@
+    })
+}
